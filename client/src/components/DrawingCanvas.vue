@@ -14,9 +14,9 @@
     />
   </div>
   <br>
-  <b-button-group>
+  <b-button-group vertical>
+    <b-button @click.prevent="VueCanvas.reset()">Clear canvas</b-button>
     <b-button @click="onUpload">Get Prediction</b-button>
-    <b-button @click.prevent="VueCanvas.reset()">Reset</b-button>
   </b-button-group>
 </template>
 

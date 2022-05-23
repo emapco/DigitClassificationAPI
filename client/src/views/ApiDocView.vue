@@ -1,9 +1,9 @@
 <template>
   <div class="accordian" role="tablist">
 
-    <b-card no-body>
+    <b-card no-body class="mb-1">
       <b-card-header header-tag="header" role="tab">
-        <b-button block v-b-toggle.accordion-1 variant="info">
+        <b-button v-b-toggle.accordion-1>
           API endpoint: POST <code>/api/file</code>
         </b-button>
       </b-card-header>
@@ -35,9 +35,9 @@
       </b-collapse>
     </b-card>
 
-    <b-card no-body>
+    <b-card no-body class="mb-1">
       <b-card-header header-tag="header" role="tab">
-        <b-button block v-b-toggle.accordion-2 variant="info">
+        <b-button block v-b-toggle.accordion-2>
           API endpoint: POST <code>/api/data</code>
         </b-button>
       </b-card-header>
@@ -67,9 +67,9 @@
       </b-collapse>
     </b-card>
 
-    <b-card no-body>
+    <b-card no-body class="mb-1">
       <b-card-header header-tag="header" role="tab">
-        <b-button block v-b-toggle.accordion-3 variant="info">
+        <b-button block v-b-toggle.accordion-3>
           Example API Response
         </b-button>
       </b-card-header>
@@ -176,10 +176,11 @@ const jsonResponse = ref(`
         }
       }
     ]
-  }
-`)
+  }`)
 </script>
 
 <style scoped>
-
+b-button {
+  background-color: transparent;
+}
 </style>

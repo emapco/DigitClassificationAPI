@@ -36,6 +36,6 @@ import {
 
 <style scoped>
 .active {
-  border-bottom: solid currentColor;
+  color: #6c757d;
 }
 </style>

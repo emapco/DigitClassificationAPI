@@ -1,5 +1,5 @@
 <template>
-  <h1>Single Digit Machine Learning Model</h1>
+  <h1>Single Digit Machine Learning Model API</h1>
   <p>
     K nearest neighbors classification and random forest classification
     models were trained using the
