@@ -24,6 +24,8 @@ The application's frontend client codebase (written with Vue.js) is located in
 the `/client` subdirectory. The machine learning model source code is located 
 in the `/model` subdirectory. The api codebase is in the root `/` directory.
 
+![client](https://user-images.githubusercontent.com/4152448/169880815-70fb81f2-2902-42c9-a74b-1fde0714e69f.png)
+
 ## API Documentation
 
 ### API endpoint: POST `/api/file`
