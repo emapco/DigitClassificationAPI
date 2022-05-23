@@ -1,59 +1,117 @@
-# ml_frontend
+# Single Digit Machine Learning Model API
+ K nearest neighbors classification and random forest classification models were 
+ trained using the MNIST digits classification dataset.
 
-This template should help get you started developing with Vue 3 in Vite.
+The models were implemented in python 3 using the scikit-learn library. In 
+particular, the KNeighborsClassifier and RandomForestClassifier classes were used.
 
-## Recommended IDE Setup
+These two models were chosen since they were the best performing (the highest 
+scores against the test dataset) out of the four models tested. Afterwards, 
+the two models' hyperparameters were fined tuned using the GridSearchCV class.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
+- KNeighborsClassifier optimized hyperparameters
+  - algorithm='kd_tree'
+  - leaf_size=10
+  - n_neighbors=4
+  - weights='distance'
 
-## Type Support for `.vue` Imports in TS
+- RandomForestClassifier optimized hyperparameters
+  -  class_weight='balanced'
+  - criterion='gini'
+  - max_features='sqrt'
+  - n_estimators=700
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+The application's frontend client codebase (written with Vue.js) is located in 
+the `/client` subdirectory. The machine learning model source code is located 
+in the `/model` subdirectory. The api codebase is in the root `/` directory.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## API Documentation
+###API endpoint: POST `/api/file`
+  Send a request with a `<form>` marked with
+  `enctype="multipart/form-data"`.
+  Within the form, include a `<input type=file
+  name=image>` tag that contains the binary image file. The
+  response is encoded in JSON.
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+####Python 3
+    import requests
 
-## Customize configuration
+    URL = 'http://127.0.0.1:5000/api/file'
+    with open('img.png', 'rb') as file:
+        files = {'image': file}
+        response = requests.post(URL, files=files)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+####JavaScript/TypeScript
+    URL = 'http://127.0.0.1:5000/api/file'
+    async function uploadFile(form: HTMLFormElement) {
+       const data = new FormData(form);
+       const response = await fetch(FILE_URL, {
+         method: "POST",
+         mode: "cors",
+         body: data
+       });
+       return response.json();
+    }
 
-## Project Setup
+###API endpoint: POST <code>/api/data</code>
+Send a request with a base64 encoded image in the payload data. The response is encoded in JSON.
 
-```sh
-npm install
-```
+####Python 3
+    import base64
+    import requests
 
-### Compile and Hot-Reload for Development
+    URL = 'http://127.0.0.1:5000/api/data'
+    with open('img.png', 'rb') as file:
+        b64_img_str = base64.b64encode(file.read())
+        response = requests.post(url, data=b64_img_str)
 
-```sh
-npm run dev
-```
+          
 
-### Type-Check, Compile and Minify for Production
+####JavaScript/TypeScript
+    URL = 'http://127.0.0.1:5000/api/data'
+    async function uploadImageData(b64EncodedImage: string) {
+       const response = await fetch(URL, {
+         method: "POST",
+         mode: "cors",
+         body: b64EncodedString
+       });
+    return response.json();
+    }
 
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run build
-npm run test:e2e # or `npm run test:e2e:ci` for headless testing
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+### Example JSON Response
+    {
+      "models": [
+        {
+          "name": "K Neighbors",
+          "prediction": 3,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0,
+            "5": 0.0,
+            "6": 0.0,
+            "7": 0.0,
+            "8": 0.0,
+            "9": 0.0
+          }
+        },
+        {
+          "name": "Random Forest",
+          "prediction": 3,
+          "probabilities": {
+            "0": 0.03,
+            "1": 0.06,
+            "2": 0.11,
+            "3": 0.35,
+            "4": 0.07,
+            "5": 0.18,
+            "6": 0.02,
+            "7": 0.04,
+            "8": 0.07,
+            "9": 0.06
+          }
+        }
+      ]
+    }
