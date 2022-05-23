@@ -6,7 +6,7 @@
         :width="canvasWidth"
         :height="canvasWidth"
         :initial-image="null"
-        lineWidth="15"
+        :lineWidth="10"
         saveAs="png"
         :styles="{
             border: 'solid 1px #000',
@@ -28,7 +28,7 @@ import {uploadImageData} from "@/api-request";
 
 const VueCanvas = ref(null);
 const image = ref(null);
-const canvasWidth = ref('600');
+const canvasWidth = ref('300');
 const emit = defineEmits(['predictionResponse']);
 
 async function onUpload() {
@@ -40,11 +40,10 @@ async function onUpload() {
 
 onMounted(async () => {
   if (window.innerWidth > 1200) {
-    canvasWidth.value = '800';
+    canvasWidth.value = '600';
   } else if (window.innerWidth < 600) {
-    canvasWidth.value = '350';
+    canvasWidth.value = '300';
   }
-
 });
 </script>
 
