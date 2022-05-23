@@ -1,13 +1,12 @@
 # Single Digit Machine Learning Model API
- K nearest neighbors classification and random forest classification models were 
- trained using the MNIST digits classification dataset.
+K nearest neighbors classification and random forest classification models were trained using the MNIST digits classification dataset.
 
 The models were implemented in python 3 using the scikit-learn library. In 
-particular, the KNeighborsClassifier and RandomForestClassifier classes were used.
+particular, the `KNeighborsClassifier` and `RandomForestClassifier` classes were used.
 
 These two models were chosen since they were the best performing (the highest 
 scores against the test dataset) out of the four models tested. Afterwards, 
-the two models' hyperparameters were fined tuned using the GridSearchCV class.
+the two models' hyperparameters were fined tuned using the `GridSearchCV` class.
 
 - KNeighborsClassifier optimized hyperparameters
   - algorithm='kd_tree'
@@ -26,14 +25,15 @@ the `/client` subdirectory. The machine learning model source code is located
 in the `/model` subdirectory. The api codebase is in the root `/` directory.
 
 ## API Documentation
-###API endpoint: POST `/api/file`
+
+### API endpoint: POST `/api/file`
   Send a request with a `<form>` marked with
   `enctype="multipart/form-data"`.
   Within the form, include a `<input type=file
   name=image>` tag that contains the binary image file. The
   response is encoded in JSON.
 
-####Python 3
+#### Python 3
     import requests
 
     URL = 'http://127.0.0.1:5000/api/file'
@@ -41,7 +41,7 @@ in the `/model` subdirectory. The api codebase is in the root `/` directory.
         files = {'image': file}
         response = requests.post(URL, files=files)
 
-####JavaScript/TypeScript
+#### JavaScript/TypeScript
     URL = 'http://127.0.0.1:5000/api/file'
     async function uploadFile(form: HTMLFormElement) {
        const data = new FormData(form);
@@ -53,10 +53,10 @@ in the `/model` subdirectory. The api codebase is in the root `/` directory.
        return response.json();
     }
 
-###API endpoint: POST <code>/api/data</code>
+### API endpoint: POST <code>/api/data</code>
 Send a request with a base64 encoded image in the payload data. The response is encoded in JSON.
 
-####Python 3
+#### Python 3
     import base64
     import requests
 
@@ -65,9 +65,7 @@ Send a request with a base64 encoded image in the payload data. The response is 
         b64_img_str = base64.b64encode(file.read())
         response = requests.post(url, data=b64_img_str)
 
-          
-
-####JavaScript/TypeScript
+#### JavaScript/TypeScript
     URL = 'http://127.0.0.1:5000/api/data'
     async function uploadImageData(b64EncodedImage: string) {
        const response = await fetch(URL, {
