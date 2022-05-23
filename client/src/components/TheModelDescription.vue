@@ -43,9 +43,9 @@
       <li>RandomForestClassifier optimized hyperparameters
         <ul>
           <li>class_weight='balanced'</li>
-          <li>criterion='entropy'</li>
-          <li>max_features='log2'</li>
-          <li>n_estimators=600</li>
+          <li>criterion='gini'</li>
+          <li>max_features='sqrt'</li>
+          <li>n_estimators=700</li>
         </ul>
       </li>
     </ul>

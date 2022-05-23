@@ -14,6 +14,11 @@ const router = createRouter({
       component: () => import('../views/DrawView.vue')
     },
     {
+      path: '/doc',
+      name: 'doc',
+      component: () => import('../views/ApiDocView.vue')
+    },
+    {
       path: '/:catchAll(.*)',
       redirect: '/draw'
     }
