@@ -32,3 +32,4 @@ coverage
 /client/cypress/
 /client/node_modules/
 client/public/
+/static
