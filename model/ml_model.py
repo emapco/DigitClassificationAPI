@@ -14,7 +14,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 class DigitModel:
-    def __init__(self, random_state=40):
+    def __init__(self, random_state=None):
         self.random_state = random_state
         self.models = {}
 
@@ -54,7 +54,8 @@ class DigitModel:
         print(f"x_test shape: {self.x_test.shape}")
         print(f"y_train shape: {self.y_train.shape}")
         print(f"y_test shape: {self.y_test.shape}")
-        print(f'Proportion of samples per class in train set:\n{self.train_sample_class_proportions}')
+        print(f'Proportion of samples per class in train set:\n'
+              f'{self.train_sample_class_proportions}')
 
     def print_top_models(self, top=2):
         best_models = self.get_best_models(top=top)
@@ -74,9 +75,9 @@ class DigitModel:
             ),
             RandomForestClassifier(
                 class_weight='balanced',
-                criterion='entropy',
-                max_features='log2',
-                n_estimators=600,
+                criterion='gini',
+                max_features='sqrt',
+                n_estimators=700,
                 n_jobs=-1,
                 random_state=self.random_state,
             ),
@@ -122,8 +123,7 @@ class DigitModel:
             'n_estimators': [200, 300, 400, 500, 600, 700],
             'max_features': ['sqrt', 'log2'],
             'class_weight': ['balanced', 'balanced_subsample'],
-            'criterio community'
-            'n': ['gini', 'entropy', 'log_loss'],
+            'criterion': ['gini', 'entropy', 'log_loss'],
         }
         kn_grid_search = GridSearchCV(
             estimator=KNeighborsClassifier(n_jobs=-1),
@@ -173,6 +173,7 @@ class DigitModel:
 
 if __name__ == '__main__':
     digit_model = DigitModel()
-    digit_model.create_hyperparameter_tuned_models()
-    # digit_model.print_optimized_models()
-    # digit_model.pickle_models()
+    # digit_model.create_hyperparameter_tuned_models()
+
+    digit_model.print_optimized_models()
+    digit_model.pickle_models()

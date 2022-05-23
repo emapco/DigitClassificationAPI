@@ -12,6 +12,11 @@
             Upload
           </router-link>
         </b-nav-item>
+        <b-nav-item>
+          <router-link active-class="active" to="/doc">
+            API Documentation
+          </router-link>
+        </b-nav-item>
       </b-nav>
     </b-card-header>
     <b-card-body>
