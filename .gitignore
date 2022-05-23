@@ -27,7 +27,8 @@ coverage
 *.sln
 *.sw?
 
-/*.dat
+*.dat
+*.png
 /client/cypress/
 /client/node_modules/
 client/public/
