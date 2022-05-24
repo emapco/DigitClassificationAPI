@@ -50,23 +50,13 @@
       </li>
     </ul>
   </div>
-  <p>This web application's frontend was created using Vue.js. The backend
-    server and api was created with flask.</p>
-  <b-button>Source code add link once publish on github</b-button>
-  <br><br>
+  <b-button href="https://github.com/emapco/DigitClassificationAPI">Source code</b-button>
 </template>
 
 <script setup lang='ts'>
-
 import {BButton} from "bootstrap-vue-3";</script>
 
 <style scoped>
-
-ul {
-  list-style-type: disc;
-  #flex: 1 1 auto;
-}
-
 .modelParameters {
   margin: auto;
   display: flex;

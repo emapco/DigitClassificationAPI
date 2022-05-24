@@ -5,8 +5,8 @@
         v-model:image="image"
         :width="canvasWidth"
         :height="canvasWidth"
-        :initial-image="null"
         :lineWidth="10"
+        lineJoin="round"
         saveAs="png"
         :styles="{
             border: 'solid 1px #000',

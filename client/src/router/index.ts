@@ -1,17 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      name: 'draw',
+      component: () => import('../views/DrawView.vue')
+    },
+    {
       path: '/upload',
       name: 'upload',
       component: () => import('../views/UploadView.vue')
-    },
-    {
-      path: '/draw',
-      name: 'draw',
-      component: () => import('../views/DrawView.vue')
     },
     {
       path: '/doc',
@@ -20,7 +20,7 @@ const router = createRouter({
     },
     {
       path: '/:catchAll(.*)',
-      redirect: '/draw'
+      redirect: '/'
     }
   ]
 })

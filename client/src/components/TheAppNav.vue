@@ -1,9 +1,9 @@
 <template>
-  <b-card no-body>
+  <b-card no-body class="header">
     <b-card-header>
       <b-nav card-header tabs>
         <b-nav-item>
-          <router-link active-class="active" to="/draw">
+          <router-link active-class="active" to="/">
             Draw
           </router-link>
         </b-nav-item>
@@ -37,5 +37,9 @@ import {
 <style scoped>
 .active {
   color: #6c757d;
+}
+
+.header {
+  margin-top: 1.5rem;
 }
 </style>
