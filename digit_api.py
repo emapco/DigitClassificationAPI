@@ -8,19 +8,20 @@ from flask import jsonify, request
 from flask_restful import Resource
 
 
+def unpickle_model(file_name):
+    with open(file_name, 'rb') as file:
+        model = pickle.load(file)
+    return model
+
+
+# initialize machine learning models
+K_NEIGHBORS_MODEL = unpickle_model(
+    'kneighbors_model.dat')
+RANDOM_FOREST_MODEL = unpickle_model(
+   'randomforest_model.dat')
+
+
 class DigitClassifier(Resource):
-    @staticmethod
-    def unpickle_model(file_name):
-        with open(file_name, 'rb') as file:
-            model = pickle.load(file)
-        return model
-
-    # initialize models as class attributes
-    k_neighbors_model = unpickle_model(
-        'kneighbors_model.dat')
-    random_forest_model = unpickle_model(
-        'randomforest_model.dat')
-
     @staticmethod
     def predict(model, img_arr):
         pred = model.predict(img_arr)[0]
@@ -83,12 +84,12 @@ class DigitClassifier(Resource):
         img_arr = cls.preprocess_img(img_byte_str)
         random_forest_pred, random_forest_proba = \
             cls.predict(
-                cls.random_forest_model,
+                RANDOM_FOREST_MODEL,
                 img_arr,
             )
         k_neighbors_pred, k_neighbors_proba = \
             cls.predict(
-                cls.k_neighbors_model,
+                K_NEIGHBORS_MODEL,
                 img_arr,
             )
         return jsonify({
@@ -143,4 +144,4 @@ class DataUploadClassifier(DigitClassifier):
                 raise ValueError  # no data provided
             return self.create_models_response(img_byte_str)
         except (binascii.Error, ValueError):
-            return jsonify({'message': 'Invalid data provided.'})
+            return jsonify({'message': 'Invalid data payload provided.'})
