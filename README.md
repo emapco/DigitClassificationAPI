@@ -28,9 +28,9 @@ in the `/model` subdirectory. The api codebase is in the root `/` directory.
 
 
 ## Start the flask API
-While in the root project directory run:
+In the terminal while in the root project directory run:
 ```sh
-python -m flask run
+python3 -m flask run
 ```
 
 
